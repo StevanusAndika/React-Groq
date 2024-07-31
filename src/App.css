@@ -1,0 +1,111 @@
+/* Import font Jost dari Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Mengatur styling global untuk seluruh elemen */
+* {
+  box-sizing: border-box; /* Menghindari padding dan border mempengaruhi ukuran elemen */
+  font-family: "Jost", sans-serif; /* Menggunakan font Jost untuk seluruh halaman */
+  font-weight: normal; /* Mengatur berat font default */
+  font-size: 18px; /* Ukuran font default */
+}
+
+/* Styling untuk elemen body */
+body {
+  background-color: #1e1e1e; /* Warna latar belakang gelap untuk halaman */
+  margin: 0; /* Menghilangkan margin default */
+}
+
+/* Styling untuk elemen form */
+form {
+  display: flex; /* Menggunakan Flexbox untuk layout form */
+  flex-direction: column; /* Menyusun elemen form secara vertikal */
+  gap: 1rem; /* Spasi antara elemen form */
+  padding-top: 1rem; /* Padding atas */
+  padding-bottom: 1rem; /* Padding bawah */
+}
+
+/* Styling untuk elemen input di dalam form */
+input {
+  padding: 0.5rem 1rem; /* Padding dalam input: vertikal 0.5rem, horizontal 1rem */
+  font-size: 1rem; /* Ukuran font untuk teks dalam input */
+  border-radius: 0.375rem; /* Sudut membulat pada border input */
+  border: 1px solid #ccc; /* Border abu-abu terang */
+  color: #333; /* Warna teks dalam input */
+}
+
+/* Styling untuk elemen main */
+main {
+  display: flex; /* Menggunakan Flexbox untuk layout */
+  flex-direction: column; /* Menyusun elemen secara vertikal */
+  min-height: 80vh; /* Tinggi minimum 80% dari viewport height */
+  justify-content: center; /* Menyusun elemen secara vertikal di tengah */
+  align-items: center; /* Menyusun elemen secara horizontal di tengah */
+  max-width: 36rem; /* Lebar maksimum */
+  width: 100%; /* Lebar penuh */
+  margin-left: auto; /* Margin otomatis untuk pusat horizontal */
+  margin-right: auto; /* Margin otomatis untuk pusat horizontal */
+}
+
+/* Styling untuk elemen h1 */
+h1 {
+  font-size: 2.25rem; /* Ukuran font besar untuk judul */
+  line-height: 2.5rem; /* Jarak antar garis */
+  color: rgb(63, 81, 181); /* Warna biru untuk judul */
+  margin: 0; /* Menghilangkan margin default */
+}
+
+/* Styling untuk elemen button */
+button {
+  padding: 0.5rem 1rem; /* Padding dalam button: vertikal 0.5rem, horizontal 1rem */
+  background-color: rgb(63, 81, 181); /* Warna latar belakang button */
+  color: white; /* Warna teks button */
+  font-weight: 700; /* Berat font untuk teks button */
+  border-radius: 0.375rem; /* Sudut membulat pada button */
+  border: none; /* Menghilangkan border default pada button */
+  cursor: pointer; /* Menampilkan pointer saat hover di atas button */
+  transition: background-color 0.3s, transform 0.3s; /* Transisi halus untuk perubahan warna latar belakang dan skala */
+}
+
+/* Styling untuk button saat aktif (ditekan) */
+button:active {
+  background-color: rgb(45, 59, 122); /* Warna latar belakang lebih gelap saat ditekan */
+  transform: scale(0.95); /* Mengurangi skala button sedikit saat ditekan */
+}
+
+/* Styling untuk button saat hover */
+button:hover {
+  background-color: rgb(45, 59, 122); /* Warna latar belakang lebih gelap saat hover */
+  transform: scale(1.05); /* Memperbesar skala button sedikit saat hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Menambahkan bayangan di sekitar button saat hover */
+}
+
+/* Styling untuk form agar lebar penuh */
+form {
+  width: 100%; /* Lebar penuh untuk form */
+}
+
+/* Styling untuk elemen hasil (result) */
+.result {
+  max-width: 36rem; /* Lebar maksimum */
+  width: 100%; /* Lebar penuh */
+  margin-left: auto; /* Margin otomatis untuk pusat horizontal */
+  margin-right: auto; /* Margin otomatis untuk pusat horizontal */
+  color: white; /* Warna teks hasil */
+}
+
+/* Keyframes untuk animasi mengetik */
+@keyframes typing {
+  from { width: 0; } /* Mulai dari lebar 0 */
+  to { width: 100%; } /* Akhir dengan lebar 100% */
+}
+
+/* Styling untuk elemen pre di dalam hasil */
+.result pre {
+  display: inline-block; /* Menyusun elemen pre sebagai blok inline */
+  white-space: pre-wrap; /* Membungkus teks jika melebihi lebar kontainer */
+  border-right: 0.15em solid orange; /* Garis vertikal berwarna oranye sebagai kursor mengetik */
+  animation: typing 3.5s steps(40, end) 1s 1 normal both, blink-caret 0.75s step-end infinite; /* Menggunakan animasi mengetik dan kursor berkedip */
+  overflow: hidden; /* Menghindari teks meluber dari area yang ditetapkan */
+  width: 0; /* Mulai dari lebar 0 untuk animasi mengetik */
+  color: white; /* Warna teks */
+}
