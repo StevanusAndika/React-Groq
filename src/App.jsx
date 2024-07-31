@@ -10,89 +10,96 @@ import withReactContent from 'sweetalert2-react-content';
 const MySwal = withReactContent(Swal);
 
 function App() {
-  // State untuk menyimpan data dari bot dan input pengguna
   const [data, setData] = useState("");
   const [inputValue, setInputValue] = useState("");
 
-  // Hook useEffect untuk menjalankan kode saat komponen pertama kali dimuat
   useEffect(() => {
-    // Ambil data yang disimpan di localStorage dengan kunci 'chatData'
+    // Cek apakah alert sudah ditampilkan sebelumnya
+    const isAlertShown = localStorage.getItem('isAlertShown');
+    
+    if (!isAlertShown) {
+      // Tampilkan alert
+      MySwal.fire({
+        
+        title: 'Hai, selamat datang di projek aplikasi saya!',
+        icon: 'info',
+        text: 'Untuk melihat portofolio saya yang lainnya, silahkan kunjungi halaman https://github.com/StevanusAndika',
+       
+        timer:4000,
+        
+     
+        
+
+        didOpen: () => {
+          MySwal.isLoading(); // Menampilkan animasi loading jika diperlukan
+        }
+      }).finally(() => {
+        // Simpan status bahwa alert sudah ditampilkan
+        localStorage.setItem('isAlertShown', 'true');
+      });
+    }
+
     const savedData = localStorage.getItem('chatData');
     if (savedData) {
-      setData(savedData); // Set data jika ditemukan
+      setData(savedData);
     }
-    // Kosongkan nilai input
     setInputValue("");
   }, []); // Dependency array kosong berarti effect ini hanya dijalankan sekali saat mount
 
-  // Fungsi untuk menangani pengiriman form
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Mencegah refresh halaman saat form disubmit
-
-    // Menampilkan modal SweetAlert2 dengan loading indicator
+    e.preventDefault();
     MySwal.fire({
       title: 'Loading...',
-      html: 'Sedang memproses permintaan anda...',
       text: 'Mohon bersabar....',
+      html: 'Sedang memproses permintaan anda...',
       didOpen: () => {
-        MySwal.showLoading(); // Menampilkan animasi loading
+        MySwal.showLoading();
       }
     });
 
-    // Delay untuk simulasi proses yang memakan waktu
     setTimeout(async () => {
       try {
-        const content = inputValue; // Ambil nilai input dari state
-        const bot = await requestTo(content); // Mengirim request dan mendapatkan response dari bot
-        setData(bot); // Set data dari bot ke state
-        localStorage.setItem('chatData', bot); // Simpan data ke localStorage
-
-        // Kosongkan inputValue setelah pengiriman
+        const content = inputValue;
+        const bot = await requestTo(content);
+        setData(bot);
+        localStorage.setItem('chatData', bot);
         setInputValue("");
-
-        MySwal.close(); // Menutup modal SweetAlert2
+        MySwal.close();
       } catch (error) {
-        // Menampilkan error jika terjadi masalah
         MySwal.fire('Error', 'Terjadi kesalahan!', 'error');
       }
-    }, 2000); // Delay selama 2 detik
+    }, 2000);
   };
 
-  // Fungsi untuk menangani perubahan pada input
   const handleChange = (e) => {
-    setInputValue(e.target.value); // Update nilai input di state
+    setInputValue(e.target.value);
   };
 
-  // Fungsi untuk menyalin teks hasil ke clipboard
   const handleCopyText = () => {
-    navigator.clipboard.writeText(data); // Salin data ke clipboard
-    MySwal.fire('Berhasil', 'Text berhasil dicopy', 'success'); // Tampilkan notifikasi sukses
+    navigator.clipboard.writeText(data);
+    MySwal.fire('Berhasil', 'Text berhasil dicopy', 'success');
   };
 
-  // Fungsi untuk menyalin kode hasil ke clipboard
   const handleCopyCode = () => {
-    navigator.clipboard.writeText(data); // Salin data ke clipboard
-    MySwal.fire('Berhasil', 'Kode berhasil dicopy', 'success'); // Tampilkan notifikasi sukses
+    navigator.clipboard.writeText(data);
+    MySwal.fire('Berhasil', 'Kode berhasil dicopy', 'success');
   };
 
   return (
     <main className='max-w-xl w-full mx-auto'>
       <h1>Steven Bot</h1>
-      {/* Form untuk input dan pengiriman */}
       <form onSubmit={handleSubmit}>
         <input
           placeholder='Ketik permintaan Anda'
           id="content"
           value={inputValue}
-          onChange={handleChange} // Memanggil handleChange saat input berubah
+          onChange={handleChange}
         />
         <button type="submit">Kirim</button>
       </form>
-      {/* Menampilkan hasil jika ada */}
       <div>
         {data && (
           <div className='result'>
-            {/* Menampilkan hasil dengan syntax highlighting jika data adalah kode */}
             {data.startsWith('') ? (
               <div>
                 <SyntaxHighlight language="swift" style={dracula} wrapLongLines={true}>

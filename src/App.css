@@ -32,6 +32,14 @@ input {
   border: 1px solid #ccc; /* Border abu-abu terang */
   color: #333; /* Warna teks dalam input */
 }
+/* Styling untuk input saat mendapat fokus */
+input:focus {
+  outline: none; /* Menghilangkan outline default saat fokus */
+  border-color: rgb(63, 81, 181); /* Warna border saat fokus */
+  box-shadow: 0 0 0 3px rgba(63, 81, 181, 0.3); /* Bayangan sekitar input saat fokus */
+  transition: border-color 0.3s, box-shadow 0.3s; /* Transisi halus untuk perubahan border dan bayangan */
+}
+
 
 /* Styling untuk elemen main */
 main {
